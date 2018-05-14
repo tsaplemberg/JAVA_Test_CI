@@ -33,7 +33,7 @@
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
-            <fileset dir="unit">
+            <fileset dir="srs">
                 <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
@@ -48,7 +48,7 @@
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="unit"/>
+            <src path="srs"/>
             <classpath refid="Test_CI.classpath"/>
         </javac>
     </target>
@@ -66,19 +66,19 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="EntryPoint">
-        <java classname="Test_Main.EntryPoint" failonerror="true" fork="yes">
-            <classpath refid="Test_CI.classpath"/>
-        </java>
-    </target>
-    <target name="EntryPointTest">
+    <target name="EntryPointTest2">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="Test_Main.EntryPointTest" todir="${junit.output.dir}"/>
+            <test name="EntryPointTest2" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
             <classpath refid="Test_CI.classpath"/>
         </junit>
+    </target>
+    <target name="New_configuration">
+        <java classname="EntryPoint" failonerror="true" fork="yes">
+            <classpath refid="Test_CI.classpath"/>
+        </java>
     </target>
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">
