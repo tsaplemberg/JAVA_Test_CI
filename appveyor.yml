@@ -23,7 +23,11 @@ build_script:
   # - bin\buck test --all --test-selectors=:windows_failures.txt --test-selectors=:windows_cxx_support.txt
 artifacts:
   # - path: buck-out\gen\programs\buck.pex
-  - path: JAVA_Test_CI\Release\buck.pex
+  # - path: JAVA_Test_CI\Release\buck.pex
+  - path: JAVA_Test_CI\Release
+    name: RTCService2
+    type: zip
+
 
 
 
