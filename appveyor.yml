@@ -1,0 +1,29 @@
+image: Visual Studio 2017
+install:
+  - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+  # - choco install gitversion.portable -pre -y
+nuget:
+  account_feed: true
+  project_feed: true
+build:
+  verbosity: minimal
+build_script:
+  - ps: ./AgileCraft.Integration.RTC.Service/build.ps1
+artifacts:
+- path: AgileCraft.Integration.RTC.Service\AgileCraft.Integration.Rtc\bin\Release
+  name: RTCService
+  type: zip
+notifications:
+- provider: Email
+  to:
+  - acey.bunch@agilecraft.com
+  subject: AgileCraft.Integration.Rtc Build Notification
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: false
+- provider: Slack
+  incoming_webhook: https://hooks.slack.com/services/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
+  channel: '#rtc'
+  on_build_success: false
+  on_build_failure: false
+  on_build_status_changed: true
