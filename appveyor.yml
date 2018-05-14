@@ -19,7 +19,7 @@ build: off
 build_script:
   - ant
   # - bin\buck build buck
-  - JAVA_Test_C build
+  - JAVA_Test_CI build
 # test_script:
   # - bin\buck test --all --test-selectors=:windows_failures.txt --test-selectors=:windows_cxx_support.txt
 artifacts:
