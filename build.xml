@@ -64,12 +64,12 @@
 			
 			
 			
-			<batchtest fork="yes" todir="${reports.tests}">
+<!-- 			<batchtest fork="yes" todir="${reports.tests}">
 				<fileset dir="${src.tests}">
 					<include name="**/*Test*.java"/>
 					<exclude name="**/AllTests.java"/>
 				</fileset>
-			</batchtest>
+			</batchtest> -->
 			
 			
 			
