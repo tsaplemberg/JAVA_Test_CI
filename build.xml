@@ -33,7 +33,7 @@
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
-            <fileset dir="srs">
+            <fileset dir="Test_CI/srs">
                 <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
