@@ -17,7 +17,7 @@ install:
 # to disable automatic builds by MsBuild
 build: off
 build_script:
-  - ant
+  - ant test
   # - bin\buck build buck
 # test_script:
   # - bin\buck test --all --test-selectors=:windows_failures.txt --test-selectors=:windows_cxx_support.txt
