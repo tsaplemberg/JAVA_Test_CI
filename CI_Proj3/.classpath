@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="D:/Work/Agile/AC_RTC_Connectors/JAVA_Test_CI/JAVA_Test_CI/CI_Proj3/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="D:/Work/Agile/AC_RTC_Connectors/JAVA_Test_CI/JAVA_Test_CI/CI_Proj3/lib/junit-4.12.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
