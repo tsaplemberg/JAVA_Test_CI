@@ -9,6 +9,15 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
+	
+	
+	
+	<property name="reports.tests" value="./reports" />
+	<property name="src.tests" value="./reports" />
+	
+	
+	
+	
     <path id="CI_Proj3.classpath">
 	<!-- TTSSAAPP -->
      <!--    <pathelement location="."/> -->
@@ -50,9 +59,16 @@
         <mkdir dir="${junit.output.dir}"/>
         <!-- <junit fork="yes" printsummary="withOutAndErr"> -->
 		<junit fork="yes" printsummary="yes">
-           <!--  <formatter type="xml"/> -->
-			<formatter type="plain"/>
+            <formatter type="plain"/>
             <test name="main_pack.main_classTest_2" todir="${junit.output.dir}"/>
+			
+			<batchtest fork="yes" todir="${reports.tests}">
+				<fileset dir="${src.tests}">
+					<include name="**/*Test*.java"/>
+					<exclude name="**/AllTests.java"/>
+				</fileset>
+			</batchtest>
+			
             <jvmarg line="-ea"/>
             <classpath refid="CI_Proj3.classpath"/>
         </junit>
