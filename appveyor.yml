@@ -1,25 +1,71 @@
 # image: Visual Studio 2017
-version: '{build}'
-environment:
-  matrix:
-    - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+# version: '{build}'
+# environment:
+  # matrix:
+    # - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+# install:
+  # - cmd: choco install ant -y -f -i
+  # - cmd: refreshenv
+  # - cmd: set GOROOT=
+  # - cmd: set PATH=%PATH:C:\go\bin;=%
+  # - cmd: set PATH=%PATH:C:\go\bin=%
+  # - cmd: set ANT_OPTS=-Xmx512m
+  # - cmd: set
+  # - cmd: python --version
+  # - cmd: java -version
+  # - cmd: ant -version
+# # to disable automatic builds by MsBuild
+# build: off
+# build_script:
+  # - ant
+  # # - bin\buck build buck
+# # test_script:
+  # # - bin\buck test --all --test-selectors=:windows_failures.txt --test-selectors=:windows_cxx_support.txt
+# artifacts:
+   # - path: Release
+   
+version: build {build} {branch}
+
+os: Visual Studio 2015
+
+clone_depth: 1
+
 install:
-  - cmd: choco install ant -y -f -i
-  - cmd: refreshenv
-  - cmd: set GOROOT=
-  - cmd: set PATH=%PATH:C:\go\bin;=%
-  - cmd: set PATH=%PATH:C:\go\bin=%
-  - cmd: set ANT_OPTS=-Xmx512m
-  - cmd: set
-  - cmd: python --version
+  - ps: |
+      Add-Type -AssemblyName System.IO.Compression.FileSystem
+      if (!(Test-Path -Path "C:\ant\apache-ant-1.9.9" )) {
+        (new-object System.Net.WebClient).DownloadFile(
+        'https://archive.apache.org/dist/ant/binaries/apache-ant-1.9.9-bin.zip',
+          'C:\ant-bin.zip'
+        )
+        [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\ant-bin.zip", "C:\ant")
+      }
+  - cmd: SET PATH=C:\ant\apache-ant-1.9.9\bin;%JAVA_HOME%\bin;%PATH%
+  - cmd: SET IVY_CACHE_DIR=C:\ivy
+  - cmd: echo %USERPROFILE%
+  - cmd: echo %PATH%
   - cmd: java -version
-  - cmd: ant -version
-# to disable automatic builds by MsBuild
-build: off
+
 build_script:
-  - ant
-  # - bin\buck build buck
-# test_script:
-  # - bin\buck test --all --test-selectors=:windows_failures.txt --test-selectors=:windows_cxx_support.txt
-artifacts:
-   - path: Release
+  - ant build
+
+test_script:
+  - ant unit-tests
+
+on_finish:
+  - ps: |
+      $url = "https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)"
+      $file = '.\junit\TESTS-TestSuites.xml'
+      $webclient = New-Object 'System.Net.WebClient'
+      # uploads currently fail because of many tests (https://github.com/appveyor/ci/issues/2084)
+      try { $webclient.UploadFile($url, (Resolve-Path $file)) } catch { $_ }
+cache:
+  - C:\ant
+  - C:\ivy
+
+# notifications:
+  # - provider: Email
+    # to:
+      # - common-java-dev@googlegroups.com
+    # on_build_success: false
+    # on_build_status_changed: true
