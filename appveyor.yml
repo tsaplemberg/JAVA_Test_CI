@@ -22,6 +22,9 @@ build_script:
   # - bin\buck build buck
 # test_script:
   # - bin\buck test --all --test-selectors=:windows_failures.txt --test-selectors=:windows_cxx_support.txt
+test_script:
+    - ant main_classTest  
+  
 artifacts:
    - path: Release
    
