@@ -63,6 +63,10 @@
             <formatter type="xml"/>
             <test name="main_pack.main_classTest_2" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
+			
+			<!-- TTSSAAPP -->
+			<jvmarg value="-Djava.compiler=NONE"/>
+			
             <classpath refid="CI_Proj3.classpath"/>
         </junit>
     </target>
