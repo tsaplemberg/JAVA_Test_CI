@@ -50,7 +50,14 @@
             <formatter type="xml"/>
             <test name="main_pack.main_classTest_2" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
-            <classpath refid="CI_Proj3.classpath"/>
+<!--             <classpath refid="CI_Proj3.classpath"/>
+ -->			
+			<classpath>
+				<path refid="CI_Proj3.classpath" />
+				<fileset dir="${junit.dir}">
+					<include name="**/junit.jar" />
+				</fileset>
+			</classpath>
         </junit>
     </target>
     <target name="junitreport">
