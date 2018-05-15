@@ -50,12 +50,10 @@
         <mkdir dir="${junit.output.dir}"/>
         <!-- <junit fork="yes" printsummary="withOutAndErr"> -->
 		<junit fork="yes" printsummary="yes">
-            <formatter type="xml"/>
+           <!--  <formatter type="xml"/> -->
+			<formatter type="plain"/>
             <test name="main_pack.main_classTest_2" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
-			
-			<jvmarg value="-Djava.compiler=NONE"/>
-			
             <classpath refid="CI_Proj3.classpath"/>
         </junit>
     </target>
